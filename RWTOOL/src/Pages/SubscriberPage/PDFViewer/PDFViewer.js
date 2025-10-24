@@ -153,10 +153,10 @@ const PDFViewer = ({ fileName = 'Q3_2024_Financial_Report.pdf', displayName, onB
                         onClick={handleBack}
                         style={{ marginRight: '10px' }}
                     >
-                         BLack
+                         Back
                     </button>    
                     <button className="btn btn-primary" onClick={handleDownload}>
-                         Download PDF
+                         Download 
                     </button>
                     <button 
                         className="btn btn-secondary" 
