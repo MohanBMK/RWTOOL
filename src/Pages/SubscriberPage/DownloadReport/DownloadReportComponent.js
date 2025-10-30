@@ -4,8 +4,7 @@ import { useNavigate, Routes, Route } from 'react-router-dom';
 import folderService from '../../../services/folderservice';
  
 import PDFViewer from '../PDFViewer/PDFViewer';
-const PDF_FILE = "Database_Fundamentals.pdf";
- 
+
 const DownloadReportComponent = () => {
     const navigate = useNavigate();
     const [searchQuery, setSearchQuery] = useState('');
@@ -17,7 +16,7 @@ const DownloadReportComponent = () => {
     const [reports, setReports] = useState([]);
     const [loading, setLoading] = useState(true);
     const [domains, setDomains] = useState([]);
- 
+
     // TODO: Replace with actual user from auth context
     const currentUser = {
         name: 'Tony Stark',
@@ -111,7 +110,16 @@ const DownloadReportComponent = () => {
         setSelectedReports([]);
     };
  
-    if(selectedFile) return <PDFViewer fileName={selectedFile} onBack={() => setSelectedFile(null)} />;
+    if(selectedFile) {
+        return (
+            <PDFViewer 
+                fileName={selectedFile.fileName} 
+                folderPath={selectedFile.folderPath}
+                displayName={selectedFile.title}
+                onBack={() => setSelectedFile(null)} 
+            />
+        );
+    }
  
     return (
         <div className="download-report-container">
@@ -237,7 +245,7 @@ const DownloadReportComponent = () => {
                                                 <button className="btn btn-download" onClick={() => handleDownload(r)}>
                                                     <i className="bi bi-download me-2"></i>Download Report
                                                 </button>
-                                                <button className="btn btn-preview-new" onClick={() => setSelectedFile(r.fileName)}>
+                                                <button className="btn btn-preview-new" onClick={() => setSelectedFile(r)}>
                                                     <i className="bi bi-eye me-2"></i>Preview Report
                                                 </button>
                                             </div>
